@@ -59,7 +59,7 @@ exports.authUser = function(req, res, next) {
 
 exports.toobusy = function(req, res, next) {
   if (toobusy()) {
-    res.send(503, '系统忙，请稍后再试');
+    res.send(503, 'System is busy, please try again later');
   } else {
     next();
   }
