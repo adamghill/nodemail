@@ -1,21 +1,21 @@
 <%- include side.html %>
 <% var box=box||"" %>
 <div class="main-body" id="J_content">
-  正在获取数据...
+  Retrieving...
 </div>
 
 <script id="inbox_tpl" type="tpl/cache">
   <%if(tag=='inbox'){%>
   {{#messages}}
-    <p>共 <strong>{{total}}</strong> 封<%if(!box){%>，其中 <a href="/mail/unseen">未读邮件</a> <strong>{{new}}</strong> 封<%}%> <!--<a href="javascript:;">全部设为已读</a>--></p>
+    <p>共 <strong>{{total}}</strong> 封<%if(!box){%>，其中 <a href="/mail/unseen">未读邮件</a> <strong>{{new}}</strong> 封<%}%> <!--<a href="javascript:;">Set all read</a>--></p>
   {{/messages}}
   <%}%>
   <table class="table table-bordered table-striped">
     <thead>
       <tr class="mail-list-header">
-        <th>发件人</th>
-        <th>主题</th>
-        <th style="min-width:140px;">时间</th>
+        <th>From</th>
+        <th>Subject</th>
+        <th style="min-width:140px;">Date</th>
       </tr>
     </thead>
     {{#each msgs}}
@@ -32,7 +32,7 @@
     {{^msgs}}
       <tr>
         <td colspan="3">
-          <div class="well">无数据</div>
+          <div class="well">None</div>
         </td>
       </tr>
     {{/msgs}}
@@ -40,11 +40,11 @@
   <%if(tag=='inbox'){%>
   <ul class="pager">
     <li class="previous">
-      <a href="/mail/inbox/page/<%=parseInt(page)+1%>">&larr; <%=parseInt(page)+1%>周前</a>
+      <a href="/mail/inbox/page/<%=parseInt(page)+1%>">&larr; <%=parseInt(page)+1%>weeks ago</a>
     </li>
     <%if(page!=1){%>
     <li class="next">
-      <a href="/mail/inbox/page/<%=parseInt(page)-1%>"><%=parseInt(page)-1%>周前 &rarr;</a>
+      <a href="/mail/inbox/page/<%=parseInt(page)-1%>"><%=parseInt(page)-1%>weeks ago &rarr;</a>
     </li>
     <%}%>
   </ul>

@@ -37,7 +37,7 @@
             <input type='text' id='q' name='q' class='search-query span3' value='<%= locals.keyword || "" %>'/>
           </form>
           <ul class='nav pull-right'>
-            <!--<li><a href='/mail'>首页</a></li>-->
+            <!--<li><a href='/mail'>Home</a></li>-->
             <%
             var site_navs = config.site_navs || [];
             for (var i = 0, l = site_navs.length; i < l; i++) {
@@ -47,11 +47,11 @@
             <% } %>
             <% locals %>
             <% if (locals.currentUser) { %>
-            <!--<li><a href='/mail'>邮箱</a></li>-->
+            <!--<li><a href='/mail'>Mailbox</a></li>-->
             <li><a><%=locals.currentUser.name%></a></li>
-            <li><a href='/signout'>退出</a></li>
+            <li><a href='/signout'>Logout</a></li>
             <% } else { %>
-            <li><a href='/signin'>登录</a></li>
+            <li><a href='/signin'>Login</a></li>
             <% } %>
           </ul>
           <a class="fork2github" href="https://github.com/nomospace/nodemail">
