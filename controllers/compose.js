@@ -3,29 +3,25 @@ var moment = require('moment');
 var mailUtil = require('../libs/mail-util');
 
 exports.index = function(req, res) {
-  if (req.session.user) {
-    var id = req.params.id;
-    if (id) {
-      mailUtil.getMailById(id, function(mail) {
-        res.locals({
-          'id': id,
-          'tag': 'inbox',
-          'moment': moment,
-          'data': mail.data
-        });
-        res.render('mail/compose.html');
-      });
-    } else {
+  var id = req.params.id;
+  if (id) {
+    mailUtil.getMailById(id, function(mail) {
       res.locals({
-        'id': '',
-        'tag': '',
-        'moment': '',
-        'data': ''
+        'id': id,
+        'tag': 'inbox',
+        'moment': moment,
+        'data': mail.data
       });
       res.render('mail/compose.html');
-    }
+    });
   } else {
-    res.redirect('/signin');
+    res.locals({
+      'id': '',
+      'tag': '',
+      'moment': '',
+      'data': ''
+    });
+    res.render('mail/compose.html');
   }
 };
 

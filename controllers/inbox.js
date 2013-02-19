@@ -25,78 +25,45 @@ emitter.on('messages', function(res) {
 });
 
 exports.index = function(req, res) {
-  if (req.session.user) {
-    var page = inboxPage = req.params.page || 1;
-    res.locals({'tag': 'inbox', 'page': page});
-    res.render('mail/list.html');
-  } else {
-    res.redirect('/signin');
-  }
+  var page = inboxPage = req.params.page || 1;
+  res.locals({'tag': 'inbox', 'page': page});
+  res.render('mail/list.html');
 };
 
 exports.flagged = function(req, res) {
-  if (req.session.user) {
-    res.locals({'tag': 'flagged'});
-    res.render('mail/list.html');
-  } else {
-    res.redirect('/signin');
-  }
+  res.locals({'tag': 'flagged'});
+  res.render('mail/list.html');
 };
 
 exports.seen = function(req, res) {
-  if (req.session.user) {
-    res.locals({'tag': 'seen'});
-    res.render('mail/list.html');
-  } else {
-    res.redirect('/signin');
-  }
+  res.locals({'tag': 'seen'});
+  res.render('mail/list.html');
 };
 
 exports.unseen = function(req, res) {
-  if (req.session.user) {
-    res.locals({'tag': 'unseen'});
-    res.render('mail/list.html');
-  }
-  else {
-    res.redirect('/signin');
-  }
+  res.locals({'tag': 'unseen'});
+  res.render('mail/list.html');
 };
 
 exports.deleted = function(req, res) {
-  if (req.session.user) {
-    res.locals({'tag': 'deleted'});
-    res.render('mail/list.html');
-  } else {
-    res.redirect('/signin');
-  }
+  res.locals({'tag': 'deleted'});
+  res.render('mail/list.html');
 };
 
 exports.answered = function(req, res) {
-  if (req.session.user) {
-    res.locals({'tag': 'answered'});
-    res.render('mail/list.html');
-  } else {
-    res.redirect('/signin');
-  }
+  res.locals({'tag': 'answered'});
+  res.render('mail/list.html');
 };
 
 exports.draft = function(req, res) {
-  if (req.session.user) {
-    res.locals({'tag': 'draft'});
-    res.render('mail/list.html');
-  } else {
-    res.redirect('/signin');
-  }
+  res.locals({'tag': 'draft'});
+  res.render('mail/list.html');
 };
 
 exports.box = function(req, res) {
-  if (req.session.user) {
-    res.locals({'tag': 'box'});
-    res.locals({'box': req.params.box});
-    res.render('mail/list.html');
-  } else {
-    res.redirect('/signin');
-  }
+  res.locals({'tag': 'box'});
+  res.locals({'box': req.params.box});
+  res.render('mail/list.html');
 };
 
 exports.getAll = function(req, res) {
@@ -137,36 +104,30 @@ exports.getBoxes = function(req, res) {
 };
 
 exports.getById = function(req, res) {
-  if (req.session.user) {
-    var id = req.params.id,
-      page = req.params.page || 1;
-    if (id !== '') {
-      mailUtil.getMailById(id, function(mail) {
-        res.locals({
-          'id': id,
-          'page': page,
-          'tag': 'mail',
-          'moment': moment,
-          'data': mail.data
-        });
-        res.render('mail/mail.html');
+  var id = req.params.id,
+    page = req.params.page || 1;
+  if (id !== '') {
+    mailUtil.getMailById(id, function(mail) {
+      res.locals({
+        'id': id,
+        'page': page,
+        'tag': 'mail',
+        'moment': moment,
+        'data': mail.data
       });
-    }
-  } else {
-    res.redirect('/signin');
+      res.render('mail/mail.html');
+    });
   }
 };
 
 exports.getHtml = function(req, res) {
-  if (req.session.user) {
-    var id = req.params.id;
-    if (id !== '') {
-      mailUtil.getMailById(id, function(mail) {
-        var html = mail.data.mail.html || mail.data.mail.text;
-        res.locals({'html': html});
-        res.render('mail/content.html', {layout: false});
-      });
-    }
+  var id = req.params.id;
+  if (id !== '') {
+    mailUtil.getMailById(id, function(mail) {
+      var html = mail.data.mail.html || mail.data.mail.text;
+      res.locals({'html': html});
+      res.render('mail/content.html', {layout: false});
+    });
   }
 };
 

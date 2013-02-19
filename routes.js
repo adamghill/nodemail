@@ -11,6 +11,16 @@ var path = require('path');
 module.exports = function(app) {
   app.use(express.static(path.join(__dirname, 'public')));
 
+  app.all('*', function(req, res, next) {
+    if (req.session.user) {
+      return next();
+    } else if (/(^\/$|signin|signout|\/ajax\/mail\/index)/g.test(req.url)) {
+      return next();
+    }
+
+    return res.redirect('/signin');
+  });
+
   // url routes
   app.get('/', site.index);
   app.get('/signin', sign.showSignin);
