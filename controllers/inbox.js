@@ -132,6 +132,10 @@ exports.getBoxMail = function(req, res) {
   _getMail(req, res, {box: box});
 };
 
+exports.getBoxes = function(req, res) {
+  cb();
+};
+
 exports.getById = function(req, res) {
   if (req.session.user) {
     var id = req.params.id,
